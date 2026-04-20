@@ -1,0 +1,12 @@
+﻿@page "/logout"
+
+<PageTitle>Kijelentkezés</PageTitle>
+
+<AuthorizeView>
+    <Authorized>
+        <div class="alert alert-info">Kijelentkezés folyamatban...</div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="alert alert-success">Sikeresen kijelentkezett. <a href="/login">Bejelentkezés</a></div>
+    </NotAuthorized>
+</AuthorizeView>

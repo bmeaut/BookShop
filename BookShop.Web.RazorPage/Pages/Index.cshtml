@@ -1,0 +1,83 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        @* @await Component.InvokeAsync("CategoryList") *@
+        <vc:category-list category-id="@Model.CategoryId" />
+    </div>
+
+    <div class="col-md-9">
+        <h2>Legújabb könyvek</h2>
+        <div class="row row-cols-5 g-2">
+            @foreach (var book in Model.NewestBooks)
+            {
+                <a asp-page="Book" asp-route-id="@book.Id" class="col">
+                    <img src="images/covers/@(book.Id).jpg" alt="@book.Title" title="@book.Title" class="img-fluid w-100" />
+                </a>
+            }
+        </div>
+        
+        @if (Model.DiscountedBooks?.Any() == true)
+        {
+            <h2>Kedvezményes könyvek</h2>
+            <div class="row row-cols-5 g-2">
+                @foreach (var book in Model.DiscountedBooks)
+                {
+                    <a asp-page="Book" asp-route-id="@book.Id" class="col">
+                        <img src="images/covers/@(book.Id).jpg" alt="@book.Title" title="@book.Title" class="img-fluid w-100" />
+                    </a>
+                }
+            </div>
+        }
+
+        <h2>A kategória könyvei</h2>
+
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+            @* @foreach (var book in Model.Books) *@
+            @foreach (var book in Model.PagedBooks.Items)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <a asp-page="Book" asp-route-id="@book.Id">
+                            <img class="card-img-top" src="~/images/covers/@(book.Id).jpg" alt="@book.Title" title="@book.Title" />
+                        </a>
+
+                        <div class="card-body">
+                            <div class="card-title fw-bold mb-0">
+                                @string.Join(", ", book.Authors.Select(x => x.Name))
+                            </div>
+                            <p class="card-text">
+                                @book.Title
+                            </p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-evenly text-muted fw-bold small">
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a asp-page="/Admin/ManageBooks" asp-route-bookId="@book.Id"><i class="bi bi-pencil-fill"></i></a>
+                            }
+                            @(book.DiscountedPrice ?? book.Price)&nbsp;Ft
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    
+        <div class="card text-center border-0">
+            <div class="card-body">
+                <div class="mb-1">
+                    @Model.PagedBooks.TotalItems találat
+                </div>
+            </div>
+
+            <vc:pager page-size="Model.PageSize"
+                      current-page="Model.CurrentPage"
+                      total-items="Model.PagedBooks.TotalItems"
+                      pages-to-show="3" />
+        </div>
+    </div>
+</div>

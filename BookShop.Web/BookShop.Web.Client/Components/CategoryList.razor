@@ -1,0 +1,12 @@
+﻿<h3>Kategóriák</h3>
+
+<div class="categories">
+    @foreach (var category in Categories)
+    {
+        <NavLink href="@($"/{category.Id}")" Match="NavLinkMatch.All" ActiveClass="active">
+            <div class="category level-@category.Level">
+                @category.Name
+            </div>
+        </NavLink>
+    }
+</div>

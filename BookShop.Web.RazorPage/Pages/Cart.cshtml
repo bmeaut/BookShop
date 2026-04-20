@@ -1,0 +1,62 @@
+﻿@page
+@model BookShop.Web.RazorPage.Pages.CartModel
+
+@{
+    ViewBag.Title = "Kosaram";
+}
+
+<h2>Kosaram</h2>
+
+@foreach (var item in Model.Cart)
+{
+    // Query the book header (the Books property is populated in the PageModel, from the database)
+    var book = Model.Books.Single(b => b.Id == item.BookId);
+
+    <div class="card flex-row mb-2">
+        <img src="@("/images/covers/" + item.BookId + ".jpg")" class="img-fluid rounded-start" alt="@book.Title" title="@book.Title" />
+
+        <div class="card-body">
+            <h5 class="card-title">
+                <a asp-page="Book" asp-route-id="@book.Id">@book.Title</a>
+                @if (!String.IsNullOrWhiteSpace(book.Subtitle))
+                {
+                    <br />
+                    <small>@book.Subtitle</small>
+                }
+            </h5>
+
+            <p class="card-text">
+                <small>
+                    @foreach (var author in book.Authors)
+                    {
+                        <a asp-page="Book" asp-route-authorId="@author.Id">@author.Name</a>
+                    }
+                </small>
+            </p>
+
+        </div>
+        <div class="card-footer border-top-0 border-start">
+            <div class="mb-3">Egységár: <b>@item.Price.ToString("N0") Ft</b></div>
+
+            <div class="d-flex align-items-center justify-content-center mb-3">
+                <form asp-page-handler="Decrement" asp-route-bookId="@item.BookId">
+                    <button class="btn btn-outline-info btn-sm me-2"><i class="bi bi-dash"></i></button>
+                </form>
+                
+                <b>@item.Count db</b>
+                <form asp-page-handler="Increment" asp-route-bookId="@item.BookId">
+                    <button class="btn btn-outline-info btn-sm ms-2"><i class="bi bi-plus"></i></button>
+                </form>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <form asp-page-handler="RemoveFromCart" asp-route-bookId="@item.BookId">
+                    <button class="btn btn-outline-danger btn-sm ms-2"><i class="bi bi-trash"></i> Eltávolítás</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+<div class="d-flex justify-content-end me-3">
+    Összesen: <b>@Model.Cart.Sum(book => book.Price * book.Count).ToString("N0") Ft</b>
+</div>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="BookShop.Bll.Services.BookService">
+    <Position X="8.25" Y="0.75" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAAACACAAAAAAAAAAQAQACBAQAAAAAAgAAAABAAAIIA=</HashCode>
+      <FileName>Services\BookService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BookShop.Bll.Services.CategoryService">
+    <Position X="8.25" Y="4.75" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAIAAAQAAAAAAAAAQABAAAAIA=</HashCode>
+      <FileName>Services\CategoryService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BookShop.Bll.Services.CommentService">
+    <Position X="8.25" Y="7.75" Width="6.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAQAAAAAAAAAAAQAAAAAABAAAAAA=</HashCode>
+      <FileName>Services\CommentService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BookShop.Bll.Services.PublisherService">
+    <Position X="8.25" Y="10.25" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAQAAAAAAQAAAAAAAAAAABAAAAIA=</HashCode>
+      <FileName>Services\PublisherService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BookShop.Bll.Services.RatingService">
+    <Position X="8.25" Y="13" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\RatingService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="BookShop.Bll.ServicesInterfaces.IBookService">
+    <Position X="2.5" Y="0.75" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACACAAAAAAAAAAAAQACBAQAAAAAAgAAAABAAAIIA=</HashCode>
+      <FileName>ServicesInterfaces\IBookService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BookShop.Bll.ServicesInterfaces.ICategoryService">
+    <Position X="2.5" Y="4.75" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAQAAAAAAAAAQAAAAAAIA=</HashCode>
+      <FileName>ServicesInterfaces\ICategoryService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BookShop.Bll.ServicesInterfaces.ICommentService">
+    <Position X="1.5" Y="7.75" Width="6.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>ServicesInterfaces\ICommentService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BookShop.Bll.ServicesInterfaces.IPublisherService">
+    <Position X="3.75" Y="10.25" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>ServicesInterfaces\IPublisherService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BookShop.Bll.ServicesInterfaces.IRatingService">
+    <Position X="5.25" Y="13" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ServicesInterfaces\IRatingService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

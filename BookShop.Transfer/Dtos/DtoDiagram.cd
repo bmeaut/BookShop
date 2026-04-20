@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BookShop.Transfer.Dtos.AuthorData">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dtos\AuthorData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BookShop.Transfer.Dtos.AuthorHeader">
+    <Position X="3.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dtos\AuthorHeader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BookShop.Transfer.Dtos.BookData">
+    <Position X="6.25" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAKAAAAAAAgAAgAACAUAAAAAAwAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Dtos\BookData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Publisher" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BookShop.Transfer.Dtos.BookHeader">
+    <Position X="6.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAEAAQAAAAAAAAABAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Dtos\BookHeader.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Authors" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BookShop.Transfer.Dtos.CategoryData">
+    <Position X="9.25" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAAAAAAAAAAAAQAAAAAAIABAAAAAAAAAAA=</HashCode>
+      <FileName>Dtos\CategoryData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BookShop.Transfer.Dtos.CommentData">
+    <Position X="3.5" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAgAAAAAAAAAAAAAACAAwAACAAAAAA=</HashCode>
+      <FileName>Dtos\CommentData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Type" />
+      <Property Name="BookHeader" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BookShop.Transfer.Dtos.PublisherHeader">
+    <Position X="9.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dtos\PublisherHeader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BookShop.Transfer.Dtos.RatingData">
+    <Position X="6.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Dtos\RatingData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BookShop.Transfer.Dtos.AddressHeader">
+    <Position X="14.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAIAAAAAAAAAAAAAAABAAIAAAQAAAA=</HashCode>
+      <FileName>Dtos\AddressHeader.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AddressType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BookShop.Transfer.Dtos.OrderData">
+    <Position X="11.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAUAEAAAAAACAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dtos\OrderData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="BillingAddress" />
+      <Property Name="ShippingAddress" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="OrderItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BookShop.Transfer.Dtos.OrderItemData">
+    <Position X="9" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAABAAAAAAAAAAAAAAAAAAAAggAAAAAA=</HashCode>
+      <FileName>Dtos\OrderItemData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Book" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BookShop.Transfer.Dtos.UserData">
+    <Position X="6.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAgAQAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Dtos\UserData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Comments" />
+      <Property Name="Ratings" />
+      <Property Name="UserAddresses" />
+      <Property Name="Orders" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BookShop.Transfer.Dtos.UserHeader">
+    <Position X="6.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dtos\UserHeader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="BookShop.Transfer.Enums.AddressType">
+    <Position X="17" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\AddressType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BookShop.Transfer.Enums.CommentType">
+    <Position X="1.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Enums\CommentType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

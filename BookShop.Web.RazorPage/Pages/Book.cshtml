@@ -1,0 +1,140 @@
+﻿@page "{id:int}"
+@model BookShop.Web.RazorPage.Pages.BookModel
+
+@{
+    ViewBag.Title = "Könyv - " + Model.Book.Title;
+}
+
+<h1 class="display-4 one-row">
+    <small>@Model.Book.Title</small>
+</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <img class="w-100 mb-2" src="images/covers/@(Model.Book.Id).jpg" alt="@Model.Book.Title" title="@Model.Book.Title" />
+        <div class="d-flex justify-content-between align-items-center py-2">
+            <h4>@(Model.Book.DiscountedPrice.HasValue? Model.Book.DiscountedPrice : Model.Book.Price)&nbsp;Ft</h4>
+
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <form asp-page-handler="AddToCart">
+                    <input type="hidden" name="bookId" value="@Model.Book.Id" />
+                    <button class="btn btn-outline-primary">Korárba</button>
+                </form>
+            }
+        </div>
+
+        <div class="text-center">
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <a asp-page="CreateComment" asp-route-bookId="@Model.Book.Id">Új ajánló írása &raquo;</a>
+            }
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        @if (!String.IsNullOrWhiteSpace(Model.Book.Subtitle))
+        {
+            <h3 class="one-row text-muted">
+                <small>@Model.Book.Subtitle</small>
+            </h3>
+        }
+
+        <div class="d-flex justify-content-between">
+            <div>
+                <h4 class="one-row">
+                    @if (Model.Book.Authors == null || !Model.Book.Authors.Any())
+                    {
+                        @:Nincs megadva
+                    }
+                    else
+                    {
+                        foreach (var author in Model.Book.Authors)
+                        {
+                            <a asp-page="/Index" asp-route-authorId="@author.Id">@author.Name</a>
+                        }
+                    }
+                </h4>
+
+                @if (Model.Book.Publisher != null)
+                {
+                    <a asp-page="/Index" asp-route-publisherId="@Model.Book.Publisher.Id">@Model.Book.Publisher.Name</a>
+                }
+            </div>
+
+            <div class="product-meta text-right">
+                <span>Kiadás&nbsp;éve:&nbsp;@Model.Book.PublishYear.</span>
+                <br />
+                <span>Oldalszám:&nbsp;@Model.Book.PageNumber</span>
+            </div>
+        </div>
+
+        <p class="py-2">@Model.Book.ShortDescription</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <h3>Kommentek</h3>
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <form asp-page-handler="CreateComment">
+                @* Hidden field bound to NewComment.BookId so it will be set for the click handler. *@
+                <input type="hidden" asp-for="NewComment.BookId" />
+
+                <div class="d-flex">
+                    <div class="d-flex flex-column align-items-center flex-shrink-0 me-3">
+                        <i class="bi bi-person-square fs-1"></i>
+                        <div class="text-muted">@(DateTime.Now.ToShortDateString())</div>
+                        <div class="text-muted">@(DateTime.Now.ToShortTimeString())</div>
+                    </div>
+
+                    <textarea class="w-100" rows="3" asp-for="NewComment.Text"></textarea>
+                </div>
+
+                <div class="d-flex justify-content-end my-2">
+                    <button type="submit" class="btn btn-outline-primary">Hozzászólok</button>
+                </div>
+            </form>
+        }
+        else
+        {
+            <div>Komment írásához be kell jelentkezned!</div>
+        }
+
+        <div class="comments my-2">
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="comment d-flex p-3">
+                    <div class="d-flex flex-column align-items-center justify-content-center flex-shrink-0 me-3">
+                        <i class="bi bi-person-square fs-1"></i>
+                        <div class="text-muted">@(comment.CreatedDate.DateTime.ToShortDateString())</div>
+                        <div class="text-muted">@(comment.CreatedDate.DateTime.ToShortTimeString())</div>
+                    </div>
+                    <div class="w-100">
+                        @comment.Text
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-lg-6">
+        @* TODO: Ajánlók *@
+        <div class="comments my-2">
+            @foreach (var comment in Model.Reviews)
+            {
+                <div class="comment d-flex p-3">
+                    <div class="w-100">
+                        @comment.Text
+                    </div>
+                    <div class="d-flex flex-column align-items-center justify-content-center flex-shrink-0 me-3">
+                        <i class="bi bi-person-square fs-1"></i>
+                        <div class="text-muted">@(comment.CreatedDate.DateTime.ToShortDateString())</div>
+                        <div class="text-muted">@(comment.CreatedDate.DateTime.ToShortTimeString())</div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

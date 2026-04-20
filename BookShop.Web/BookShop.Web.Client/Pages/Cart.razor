@@ -1,0 +1,56 @@
+﻿@page "/Cart"
+
+<PageTitle>Kosár</PageTitle>
+
+<h2>Kosaram</h2>
+
+@foreach (var item in CartItems)
+{
+    // Query the book header (the Books property is populated in the PageModel, from the database)
+    var book = Books.SingleOrDefault(b => b.Id == item.BookId);
+
+    if (book is null)
+        continue;
+
+    <div class="card flex-row mb-2">
+        <img src="@("/images/covers/" + item.BookId + ".jpg")" class="img-fluid rounded-start" alt="@book.Title" title="@book.Title" />
+
+        <div class="card-body">
+            <h5 class="card-title">
+                <a asp-page="Book" asp-route-id="@book.Id">@book.Title</a>
+                @if (!String.IsNullOrWhiteSpace(book.Subtitle))
+                {
+                    <br />
+                    <small>@book.Subtitle</small>
+                }
+            </h5>
+
+            <p class="card-text">
+                <small>
+                    @foreach (var author in book.Authors)
+                    {
+                        <a asp-page="Book" asp-route-authorId="@author.Id">@author.Name</a>
+                    }
+                </small>
+            </p>
+
+        </div>
+        <div class="card-footer border-top-0 border-start">
+            <div class="mb-3">Egységár: <b>@item.Price.ToString("N0") Ft</b></div>
+
+            <div class="d-flex align-items-center justify-content-center mb-3">
+                <button class="btn btn-outline-info btn-sm me-2" @onclick="@(async () => await cartService.DecrementAsync(book.Id))"><i class="bi bi-dash"></i></button>
+
+                <b>@item.Count db</b>
+                <button class="btn btn-outline-info btn-sm ms-2" @onclick="@(async () => await cartService.IncrementAsync(book.Id))"><i class="bi bi-plus"></i></button>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-outline-danger btn-sm ms-2" @onclick="@(async () => await cartService.RemoveAsync(book.Id))"><i class="bi bi-trash"></i> Eltávolítás</button>
+            </div>
+        </div>
+    </div>
+}
+<div class="d-flex justify-content-end me-3">
+    Összesen:&nbsp;<b>@CartItems.Sum(book => book.Price * book.Count).ToString("N0") Ft</b>
+</div>

@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager navigationManager
+
+<AuthorizeView>
+    <Authorized>
+        <p class="mb-0">Hello, @context.User.Identity?.Name!</p>
+        <button class="btn btn-outline-primary ms-3" @onclick="@ToLogOut">
+            <span class="bi bi-box-arrow-right" aria-hidden="true"></span> Kijelentkezés
+        </button>
+    </Authorized>
+    <NotAuthorized>
+        <button class="btn btn-outline-primary me-3" @onclick="@ToLogin">
+            <span class="bi bi-box-arrow-in-right" aria-hidden="true"></span> Bejelentkezés
+        </button>
+        <button class="btn btn-outline-secondary" @onclick="@(() => navigationManager.NavigateTo("/register"))">
+            <span class="bi bi-person-plus" aria-hidden="true"></span> Regisztráció
+        </button>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    protected void ToLogin()
+    {
+        InteractiveRequestOptions requestOptions = new()
+        {
+            Interaction = InteractionType.SignIn,
+            ReturnUrl = navigationManager.Uri,
+        };
+
+        navigationManager.NavigateToLogin("/login", requestOptions);
+    }
+
+    protected void ToLogOut()
+        => navigationManager.NavigateToLogout("/logout", "/");
+}

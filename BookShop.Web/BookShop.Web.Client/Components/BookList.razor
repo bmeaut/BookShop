@@ -1,0 +1,68 @@
+﻿@if ( (!UsePager && Books.Any()) || (UsePager && PagedBooks?.Items.Any() == true))
+{
+    <h2>@Title</h2>
+
+    @if (ItemTemplate is not null)
+    {
+        <div class="@($"row row-cols-{Count} g-2")">
+            @foreach (var book in Books)
+            {
+                @ItemTemplate(book)
+            }
+        </div>
+    }
+    else
+    {
+        @if (DisplayMode == BookDisplayMode.ImageOnly)
+        {
+            <div class="@($"row row-cols-{Count} g-2")">
+                @foreach (var book in Books)
+                {
+                    <a href="@($"Book/{book.Id}")" class="col">
+                        <img src="images/covers/@(book.Id).jpg" alt="@book.Title" title="@book.Title" class="img-fluid w-100" />
+                    </a>
+                }
+            </div>
+        }
+        else if (DisplayMode == BookDisplayMode.Card)
+        {
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+                @foreach (var book in UsePager ? PagedBooks.Items : Books)
+                {
+                    <div class="col">
+                        <div class="card h-100">
+                            <a href="@($"Book/{book.Id}")">
+                                <img class="card-img-top" src="images/covers/@(book.Id).jpg" alt="@book.Title" title="@book.Title" />
+                            </a>
+
+                            <div class="card-body">
+                                <div class="card-title fw-bold mb-0">
+                                    @string.Join(", ", book.Authors.Select(x => x.Name))
+                                </div>
+                                <p class="card-text">
+                                    @book.Title
+                                </p>
+                            </div>
+                            <div class="card-footer text-end text-muted fw-bold small">
+                                @(book.DiscountedPrice ?? book.Price)&nbsp;Ft
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    }
+
+    @if (UsePager)
+    {
+        <div class="card text-center border-0">
+            <div class="card-body">
+                <div class="mb-1">
+                    @PagedBooks.TotalItems találat
+                </div>
+            </div>
+
+            <Pager PageSize="@PageSize!.Value" CurrentPage="@CurrentPage!.Value" TotalItems="@PagedBooks.TotalItems" PagesToShow="3" />
+        </div>
+    }
+}

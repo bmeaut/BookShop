@@ -1,0 +1,13 @@
+﻿@using BookShop.Transfer.Dtos
+@model IList<CategoryData>
+
+<div class="categories">
+    @foreach (var category in Model)
+    {
+        <div class="category level-@category.Level">
+            <a asp-route-categoryId="@category.Id" class="@((int?)ViewData["CategoryId"] == category.Id ? "active" : "")">
+                @category.Name
+            </a>
+        </div>
+    }
+</div>

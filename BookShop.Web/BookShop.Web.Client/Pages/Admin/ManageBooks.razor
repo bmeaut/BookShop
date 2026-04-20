@@ -1,0 +1,104 @@
+﻿@page "/admin/manage-books/{bookId:int?}"
+@using Blazilla
+
+<h1>Könyvek kezelése</h1>
+<h2>@(BookId.HasValue ? "Könyv szerkesztése" : "Új könyv felvitele")</h2>
+
+<EditForm Model="Book" enctype="multipart/form-data" class="form-horizontal" role="form">
+    <FluentValidator />
+
+    <div class="row g-4">
+        <div class="col-md-8">
+            <h4>Alapadatok</h4>
+            <div class="row g-3">
+                <div class="col-lg-6">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" @bind="@Book.PublisherId">
+                            <option value="">Nincs</option>
+                            @foreach( var item in AllPublishers)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                        <label asp-for="Book.PublisherId">Kiadó</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" @bind="Book.CategoryId">
+                            <option value="">Nincs</option>
+                            @foreach( var item in AllCategories)
+                            {
+                                <option value="@item.Id">@(item.Name.PadLeft(item.Name.Length + (item.Level - 1) * 3, '\xA0'))</option>
+                            }
+                        </select>
+                        <label asp-for="Book.CategoryId">Kategória</label>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <InputNumber class="form-control" @bind-Value="@Book.PublishYear" placeholder=" " />
+                        <label asp-for="Book.PublishYear">Kiadás éve</label>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <InputNumber class="form-control" @bind-Value="@Book.PageNumber" placeholder=" " />
+                        <label asp-for="Book.PageNumber">Oldalszám</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <InputText class="form-control" @bind-Value="@Book.Title" placeholder=" " />
+                <label asp-for="Book.Title">Cím</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <InputText class="form-control" @bind-Value="@Book.Subtitle" placeholder=" " />
+                <label asp-for="Book.Subtitle">Alcím</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <InputTextArea class="form-control" @bind-Value="@Book.ShortDescription" rows="10" placeholder=" " />
+                <label asp-for="Book.ShortDescription">Fülszöveg</label>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h4>Borítókép</h4>
+            <div class="mb-3">
+                <InputFile OnChange="LoadFile" accept="@string.Join(',', FileSettings.PermittedExtensions)"  />
+            </div>
+
+            <div class="row g-3">
+                <div class="col-6">
+                    <div class="form-floating">
+                        <InputNumber class="form-control" @bind-Value="@Book.Price" placeholder=" " />
+                        <label asp-for="Book.Price">Ár</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <InputNumber class="form-control" @bind-Value="@Book.DiscountedPrice" placeholder=" " />
+                        <label asp-for="Book.DiscountedPrice">Kedv. ár</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button @onclick="UpdateAsync" class="btn btn-primary">
+                @(BookId is null ? "Létrehozás" : "Módosítás")
+            </button>
+
+            @if (BookId.HasValue)
+            {
+                <button @onclick="DeleteAsync" class="btn btn-danger">Törlés</button>
+            }
+        </div>
+    </div>
+</EditForm>
