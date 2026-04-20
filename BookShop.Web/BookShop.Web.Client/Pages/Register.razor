@@ -1,0 +1,49 @@
+﻿@page "/Register"
+@using Blazilla
+
+<PageTitle>Bejelentkezés</PageTitle>
+
+<div class="d-flex justify-content-center w-100">
+
+    <EditForm Model="RegisterData" OnValidSubmit="@HandleRegister" class="d-flex justify-content-center flex-column w-50 gap-3">
+        <FluentValidator />
+        <ValidationSummary />
+
+        <h1>Regisztráció</h1>
+
+        @if (Errors?.Any() == true)
+        {
+            <div class="alert alert-danger alert-dismissible fade show">
+                <h4 class="alert-heading"><i class="bi-exclamation-octagon-fill"></i> Hiba!</h4>
+                @for( int i = 0; i < Errors.Length; i++)
+                {
+                    <p class="mb-0">@Errors[i]</p>
+                }
+            </div>
+        }
+
+        <div class="form-floating w-100">
+            <InputText class="form-control h-100" @bind-Value="RegisterData.Email" placeholder="" />
+            <label>E-mail cím</label>
+        </div>
+
+        <div class="form-floating w-100">
+            <InputText type="password" class="form-control h-100" @bind-Value="RegisterData.Password" placeholder="" />
+            <label>Jelszó</label>
+        </div>
+
+        <div class="form-floating w-100">
+            <InputText type="password" class="form-control h-100" @bind-Value="RegisterData.PasswordAgain" placeholder="" />
+            <label>Jelszó mégegyszer</label>
+        </div>
+
+        <div class="form-floating w-100">
+            <InputText type="text" class="form-control h-100" @bind-Value="RegisterData.DisplayName" placeholder="" />
+            <label>Teljes név</label>
+        </div>
+
+        <div class="d-flex justify-content-end my-2">
+            <button type="submit" class="btn btn-outline-primary">Regisztráció</button>
+        </div>
+    </EditForm>
+</div>

@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Data/Boritok.zip" />
+    <File Path="dotnet-tools.json" />
+  </Folder>
+  <Project Path="BookShop.Api/BookShop.Api.csproj" Id="6b24d427-bb2a-4e33-9423-f25ee82e0463" />
+  <Project Path="BookShop.Bll/BookShop.Bll.csproj" />
+  <Project Path="BookShop.ConsoleApp/BookShop.ConsoleApp.csproj" />
+  <Project Path="BookShop.Dal/BookShop.Dal.csproj" />
+  <Project Path="BookShop.Server.Abstraction/BookShop.Server.Abstraction.csproj" Id="2afe12f7-367e-4f09-b496-0acb23a7ff3f" />
+  <Project Path="BookShop.Transfer/BookShop.Transfer.csproj" />
+  <Project Path="BookShop.Web.RazorPage/BookShop.Web.RazorPage.csproj" Id="b4fd2a10-1e38-4fc0-8384-895d7e1a6321" />
+  <Project Path="BookShop.Web/BookShop.Web.Client/BookShop.Web.Client.csproj" Id="bb1afd2e-014a-4bcc-850a-3bcbed914a16" />
+  <Project Path="BookShop.Web/BookShop.Web/BookShop.Web.csproj" Id="3ed41caa-81dc-4319-8dec-f9282ca10e4a" />
+</Solution>

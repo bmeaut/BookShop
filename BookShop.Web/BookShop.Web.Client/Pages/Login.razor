@@ -1,0 +1,34 @@
+﻿@page "/Login"
+@using Blazilla
+
+<PageTitle>Bejelentkezés</PageTitle>
+
+<div class="d-flex justify-content-center w-100">
+
+    <EditForm Model="LoginData" OnValidSubmit="@HandleLogin" class="d-flex justify-content-center flex-column w-50 gap-3">
+        <FluentValidator />
+
+        <h1>Bejelentkezés</h1>
+
+        @if (LoginFailed)
+        {
+            <div class="alert alert-danger alert-dismissible fade show">
+                <h4 class="alert-heading"><i class="bi-exclamation-octagon-fill"></i> Hiba!</h4>
+                <p class="mb-0">A belépési adatok nem megfelelőek.</p>
+            </div>
+        }
+
+        <div class="form-floating w-100">
+            <InputText class="form-control h-100" @bind-Value="LoginData.Email" placeholder="" />
+            <label>E-mail cím</label>
+        </div>
+        <div class="form-floating w-100">
+            <InputText type="password" class="form-control h-100" @bind-Value="LoginData.Password" placeholder="" />
+            <label>Jelszó</label>
+        </div>
+
+        <div class="d-flex justify-content-end my-2">
+            <button type="submit" class="btn btn-outline-primary">Bejelentkezés</button>
+        </div>
+    </EditForm>
+</div>

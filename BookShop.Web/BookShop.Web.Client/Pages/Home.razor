@@ -1,0 +1,88 @@
+﻿@page "/{categoryId:int?}"
+@using BookShop.Transfer.Enums
+@using BookShop.Web.Client.Components
+@using BookShop.Web.Client.Models
+
+<PageTitle>Home</PageTitle>
+
+<div class="row">
+    <div class="col-md-3">
+        <CategoryList />
+    </div>
+
+@*     <div class="col-md-9">
+        <h2>Legújabb könyvek</h2>
+        <div class="row row-cols-5 g-2">
+            @foreach (var book in NewestBooks)
+            {
+                <a href="@($"Book/{book.Id}")" class="col">
+                    <img src="images/covers/@(book.Id).jpg" alt="@book.Title" title="@book.Title" class="img-fluid w-100" />
+                </a>
+            }
+        </div>
+
+        @if (DiscountedBooks?.Any() == true)
+        {
+            <h2>Kedvezményes könyvek</h2>
+            <div class="row row-cols-5 g-2">
+                @foreach (var book in DiscountedBooks)
+                {
+                    <a href="@($"Book/{book.Id}")" class="col">
+                        <img src="images/covers/@(book.Id).jpg" alt="@book.Title" title="@book.Title" class="img-fluid w-100" />
+                    </a>
+                }
+            </div>
+        }
+
+        <h2>A kategória könyvei</h2>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+            @foreach (var book in Books)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <a href="@($"Book/{book.Id}")">
+                            <img class="card-img-top" src="/images/covers/@(book.Id).jpg" alt="@book.Title" title="@book.Title" />
+                        </a>
+
+                        <div class="card-body">
+                            <div class="card-title fw-bold mb-0">
+                                @string.Join(", ", book.Authors.Select(x => x.Name))
+                            </div>
+                            <p class="card-text">
+                                @book.Title
+                            </p>
+                        </div>
+                        <div class="card-footer text-end text-muted fw-bold small">
+                            @(book.DiscountedPrice ?? book.Price)&nbsp;Ft
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div> *@
+
+    <div class="col-md-9">
+        @if (CategoryId is null)
+        {
+            <BookList Type="BookListType.Newest" DisplayMode="BookDisplayMode.ImageOnly" Title="Legújabb könyvek">
+                <ItemTemplate>
+                    <a href="@($"Book/{context.Id}")" class="col">
+                        <img src="images/covers/@(context.Id).jpg" alt="@context.Title" 
+                             title="@context.Title" class="img-fluid w-100 border border-primary" />
+                    </a>
+                </ItemTemplate>
+            </BookList>
+
+            <BookList Type="BookListType.Discounted" DisplayMode="BookDisplayMode.ImageOnly" Title="Kedvezményes könyvek" />
+        }
+        else
+        {
+            <BookList Type="BookListType.Category" DisplayMode="BookDisplayMode.Card"
+                      CategoryId="@CategoryId" Title="@($"A kategória könyvei ({CategoryId})")"
+                      UsePager="true" />
+            @* <BookList Type="BookListType.Category" DisplayMode="BookDisplayMode.Card" 
+                      CategoryId="@CategoryId" Title="@($"A kategória könyvei ({CategoryId})")"
+                      UsePager="true" PageSize="@PageSize" CurrentPage="@CurrentPage" /> *@
+        }
+    </div>
+</div>

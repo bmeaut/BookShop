@@ -1,0 +1,41 @@
+﻿@using BookShop.Web.Client.Extensions
+
+@if (TotalPages > 1)
+{
+    <nav>
+        <ul class="pagination justify-content-center">
+            @* Link for the fist page. *@ 
+            @if (CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a href="@ToPage(1)" class="page-link"><span>&laquo;</span></a>
+                </li>
+            }
+
+            @* Links in the middle with page numbers. *@
+            @for (var pageNumber = Math.Max(1, CurrentPage - PagesToShow); pageNumber <= Math.Min(TotalPages, CurrentPage + PagesToShow); pageNumber++)
+            {
+                @if (CurrentPage == pageNumber)
+                {
+                    <li class="page-item active"><a class="page-link">@pageNumber</a></li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a href="@ToPage(pageNumber)" class="page-link">@pageNumber</a>
+                    </li>
+                }
+            }
+
+            @* Link for the last page *@ 
+            @if (CurrentPage < TotalPages)
+            {
+                <li class="page-item">
+                    <a href="@ToPage(TotalPages)" class="page-link">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

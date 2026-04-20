@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager navigationManager
+
+@code {
+    protected override void OnInitialized()
+    {
+        InteractiveRequestOptions requestOptions = new()
+        {
+            Interaction = InteractionType.SignIn,
+            ReturnUrl = navigationManager.Uri,
+        };
+
+        navigationManager.NavigateToLogin("login", requestOptions);
+    }
+}

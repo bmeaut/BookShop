@@ -1,0 +1,49 @@
+﻿@page "/admin/manage-categories/{categoryId:int?}"
+
+<h2>Kategóriák menedzselése</h2>
+<p>Az adminisztrátorok itt hozhatnak létre új kategóriát, vagy módosíthatják / törölhetik a meglévőket.</p>
+
+@* <div class="row">
+    <div class="col-md-3">
+        <vc:category-list category-id="@Model.CategoryId" />
+    </div>
+
+    <div class="col-md-9">
+        <h2>@(Model.CategoryId.HasValue ? "Kategória módosítása" : "Új kategória felvitele")</h2>
+
+        <form method="post" class="form-horizontal" role="form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Category.Id" />
+
+            <div class="form-floating mb-3">
+                <input class="form-control" asp-for="Category.Name" placeholder=" " />
+                <label asp-for="Category.Name">Kategória neve</label>
+            </div>
+            <div class="form-floating mb-3">
+                <select class="form-select" asp-for="Category.ParentCategoryId" asp-items="Model.AllCategories">
+                    <option value="">Nincs</option>
+                </select>
+                <label asp-for="Category.ParentCategoryId">Szülő kategória</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input class="form-control" asp-for="Category.Order" placeholder=" " />
+                <label asp-for="Category.Order">Sorrend</label>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button asp-page-handler="AddOrUpdate" class="btn btn-primary">
+                    @(Model.Category.Id.HasValue ? "Módosítás" : "Létrehozás")
+                </button> 
+                
+                @if (Model.Category.Id.HasValue) 
+                {
+                    <button asp-page-handler="Cancel" class="btn btn-dark">Mégsem</button>
+
+                    <button asp-page-handler="Delete" class="btn btn-danger">Törlés</button>
+                }
+            </div>
+        </form>
+    </div>
+</div>
+ *@

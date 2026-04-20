@@ -1,0 +1,51 @@
+﻿@model BookShop.Web.RazorPage.ViewComponents.PagerViewComponent.PagerArgs
+
+@{
+    // Read the query string parameters into a dictionary, and add the current page parameter (with empty string value) if not present.
+    Dictionary<string, string> allRouteData = Context.Request.Query.ToDictionary(q => q.Key, q => q.Value.ToString()); 
+    allRouteData["currentPage"] = String.Empty;
+}
+
+@if (Model.TotalPages > 1)
+{
+    <nav>
+        <ul class="pagination justify-content-center">
+            @* Első oldalra link *@ 
+            @if (Model.CurrentPage > 1)
+            {
+                allRouteData["currentPage"] = "1";
+                <li class="page-item">
+                    <a asp-all-route-data="allRouteData" class="page-link"><span>&laquo;</span></a>
+                </li>
+            }
+
+            @* Középső részen megjelenő linkek *@
+            @for (var pageNumber = Math.Max(1, Model.CurrentPage - Model.PagesToShow); pageNumber <= Math.Min(Model.TotalPages, Model.CurrentPage + Model.PagesToShow); pageNumber++)
+            {
+                @if (Model.CurrentPage == pageNumber)
+                {
+                    <li class="page-item active"> <a class="page-link">@pageNumber</a> </li>
+                }
+                else
+                {
+                    allRouteData["currentPage"] = pageNumber.ToString();
+
+                    <li class="page-item">
+                        <a asp-all-route-data="allRouteData" class="page-link">@pageNumber</a>
+                    </li>
+                }
+            }
+
+            @* Utolsó oldalra link *@ 
+            @if (Model.CurrentPage < Model.TotalPages)
+            {
+                allRouteData["currentPage"] = Model.TotalPages.ToString();
+                <li class="page-item">
+                    <a asp-all-route-data="allRouteData" class="page-link">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+}
