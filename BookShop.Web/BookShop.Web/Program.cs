@@ -125,6 +125,54 @@ app.MapIdentityApi<ApplicationUser>();
 app.UseAuthentication();
 app.UseAuthorization();
 
+
+const int cpuBurnMs = 2000;
+
+app.UseWhen(
+    ctx => HttpMethods.IsGet(ctx.Request.Method) &&
+           ctx.Request.Path.Equals("/api/Categories", StringComparison.OrdinalIgnoreCase),
+    branch =>
+    {
+        var loggerFactory =
+            branch.ApplicationServices.GetRequiredService<ILoggerFactory>();
+
+        var logger =
+            loggerFactory.CreateLogger("CpuBurnCategoriesBranch");
+
+        branch.Use(async (context, next) =>
+        {
+            logger.LogInformation(
+                "CPU burn branch activated for {Method} {Path}",
+                context.Request.Method,
+                context.Request.Path);
+
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            double x = 0;
+
+            logger.LogInformation(
+                "Starting CPU burn for {DurationMs} ms on {Path}",
+                cpuBurnMs,
+                context.Request.Path);
+
+            while (sw.ElapsedMilliseconds < cpuBurnMs)
+            {
+                context.RequestAborted.ThrowIfCancellationRequested();
+
+                x += Math.Sqrt((sw.ElapsedTicks & 1023) + 1);
+                if (x > 1_000_000)
+                    x = 0;
+            }
+
+            logger.LogInformation(
+                "Finished CPU burn after {ElapsedMs} ms on {Path}",
+                sw.ElapsedMilliseconds,
+                context.Request.Path);
+
+            await next(context);
+        });
+    });
+
+
 // Provide an endpoint to clear the cookie for logout
 // For more information on the logout endpoint and antiforgery, see:
 // https://learn.microsoft.com/aspnet/core/blazor/security/webassembly/standalone-with-identity#antiforgery-support
