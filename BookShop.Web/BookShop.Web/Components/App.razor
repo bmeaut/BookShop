@@ -1,4 +1,7 @@
 ﻿@inject IConfiguration Configuration
+@{
+    var aiConnectionString = Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"] ?? "";
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +12,7 @@
       src: "https://js.monitor.azure.com/scripts/b/ai.3.gbl.min.js",
       crossOrigin: "anonymous",
       cfg: {
-        connectionString: "@Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]"
+        connectionString: "@aiConnectionString"
       }
     });
     </script>
