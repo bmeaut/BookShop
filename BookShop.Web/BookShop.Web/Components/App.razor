@@ -1,7 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@inject IConfiguration Configuration
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <script type="text/javascript">
+    !(function (cfg){function e(){cfg.onInit&&cfg.onInit(n)}var x,w,D,t,E,n,C=window,O=document,b=C.location,q="script",I="ingestionendpoint",L="disableExceptionTracking",j="ai.device.";"instrumentationKey"[x="toLowerCase"](),w="crossOrigin",D="POST",t="appInsightsSDK",E=cfg.name||"appInsights",(cfg.name||C[t])&&(C[t]=E),n=C[E]||function(g){var f=!1,m=!1,h={initialize:!0,queue:[],sv:"8",version:2,config:g};function v(e,t){var n={},i="Browser";function a(e){e=""+e;return 1===e.length?"0"+e:e}return n[j+"id"]=i[x](),n[j+"type"]=i,n["ai.operation.name"]=b&&b.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(h.sv||h.version),n}function r(e,t){var n=t.toString(),i=v();return i["ai.data.isSynthetic"]=e.isSyntheticUser||!1,i["ai.data.source"]=e.sourceUrl||"",n}function u(e){C[E].queue&&0===C[E].queue.length?(s(),C[E].queue.push(e)):C[E].queue.push(e)}function s(){var e=C[E].config;var t=document.createElement(q);t.setAttribute("async",1);t[w]=cfg[w]||"",t.src=cfg.src;var n=document.getElementsByTagName(q)[0];n&&n.parentNode&&n.parentNode.insertBefore(t,n);C[E].queue=[];var i=function(e,t){var n={};n[e]=t;return n};t.onload=e;t.onerror=function(){var t="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)";var n=r(cfg,t);C[E].queue.push({name:"SdkLoadFailed",iKey:cfg.cfg.instrumentationKey||"",time:new Date,ver:"js:0.1",sampleRate:100,tags:n,data:{baseType:"ExceptionData",baseData:{ver:2,handledAt:"Unhandled",exceptions:[{typeName:"SDKError",message:t,hasFullStack:!1,stack:""}],properties:i("sdkSrc",t)}}})}}}(cfg.cfg)}(
+    {
+      src: "https://js.monitor.azure.com/scripts/b/ai.3.gbl.min.js",
+      crossOrigin: "anonymous",
+      cfg: {
+        connectionString: "@Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]"
+      }
+    });
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
